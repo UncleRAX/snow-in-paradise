@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0b3428">
+  <meta name="description" content="Snow in Paradise — A Magical Christmas Carnival by Paradise Circuit. Join us on 20 December 2026 at 12:00 PM.">
+  <title>Snow in Paradise | Paradise Circuit</title>
+  <style>
+    :root {
+      --green: #1F4D34;
+      --deep: #082b21;
+      --gold: #D4AF37;
+      --cream: #F6F3EC;
+      --white: #fffdf7;
+      --ink: #123528;
+      --muted: #63756b;
+      --line: rgba(31,77,52,.16);
+      --shadow: 0 18px 55px rgba(4, 35, 25, .14);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--cream);
+      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.6;
+    }
+    a { color: inherit; }
+    .wrap { width: min(1120px, calc(100% - 36px)); margin-inline: auto; }
+    .topbar {
+      position: sticky; top: 0; z-index: 10;
+      background: rgba(8,43,33,.96); color: var(--white);
+      border-bottom: 1px solid rgba(212,175,55,.35);
+      backdrop-filter: blur(12px);
+    }
+    .nav { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 20px; }
+    .brand { display: flex; align-items: center; gap: 11px; text-decoration: none; color: var(--gold); font-family: Georgia, serif; letter-spacing: .13em; font-size: 1.05rem; line-height: 1.1; }
+    .brand-logo { display: block; width: 48px; height: 48px; object-fit: contain; border-radius: 50%; background: var(--cream); padding: 3px; }
+    .brand small { display: block; font: 700 .55rem/1.8 system-ui, sans-serif; color: #f4e7b4; letter-spacing: .2em; }
+    .navlinks { display: flex; align-items: center; gap: 22px; }
+    .navlinks a { color: #fffdf7; text-decoration: none; font-size: .9rem; }
+    .navlinks a:hover { color: var(--gold); }
+    .btn {
+      display: inline-flex; align-items: center; justify-content: center; gap: 9px;
+      border: 0; border-radius: 999px; padding: 13px 21px;
+      font: 800 .95rem/1.2 inherit; text-decoration: none; cursor: pointer;
+      transition: transform .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .btn-gold { background: var(--gold); color: #182b20; box-shadow: 0 8px 22px rgba(212,175,55,.2); }
+    .btn-green { background: var(--green); color: white; }
+    .btn-outline { border: 1px solid var(--gold); color: var(--white); background: transparent; }
+    .hero {
+      position: relative; overflow: hidden; color: white;
+      background:
+        radial-gradient(circle at 15% 10%, rgba(212,175,55,.16), transparent 26%),
+        radial-gradient(circle at 85% 35%, rgba(255,255,255,.09), transparent 22%),
+        linear-gradient(135deg, #082b21 0%, #1F4D34 54%, #0a3024 100%);
+      padding: 66px 0 72px;
+    }
+    .hero::before, .hero::after {
+      content: "❄"; position: absolute; color: rgba(255,255,255,.12);
+      font-size: 9rem; pointer-events: none;
+    }
+    .hero::before { left: -18px; top: 20px; }
+    .hero::after { right: 1%; bottom: 8px; font-size: 13rem; }
+    .hero-grid { display: grid; grid-template-columns: 1.02fr .98fr; align-items: center; gap: 48px; position: relative; z-index: 1; }
+    .eyebrow { color: var(--gold); font-size: .78rem; font-weight: 900; letter-spacing: .22em; text-transform: uppercase; }
+    h1 { font: 900 clamp(2.7rem, 6vw, 5.3rem)/.94 Georgia, "Times New Roman", serif; letter-spacing: -.04em; margin: 16px 0; }
+    h1 span { display: block; color: #e8f4f2; text-shadow: 0 4px 0 rgba(0,0,0,.16); }
+    .hero h2 { color: var(--gold); font: 800 clamp(1.05rem, 2.3vw, 1.65rem)/1.25 Georgia, serif; margin: 18px 0 12px; }
+    .hero-copy { max-width: 570px; color: #e5eee8; font-size: 1.06rem; }
+    .event-meta { display: flex; flex-wrap: wrap; gap: 10px; margin: 24px 0 28px; }
+    .meta-pill { border: 1px solid rgba(212,175,55,.45); border-radius: 999px; padding: 9px 13px; background: rgba(255,255,255,.06); font-weight: 700; font-size: .9rem; }
+    .hero-actions { display: flex; flex-wrap: wrap; gap: 12px; }
+    .poster-frame { background: rgba(255,255,255,.08); padding: 10px; border: 1px solid rgba(212,175,55,.55); border-radius: 20px; box-shadow: 0 25px 70px rgba(0,0,0,.34); transform: rotate(1deg); }
+    .poster-frame img { display: block; width: 100%; height: auto; max-height: 700px; object-fit: contain; border-radius: 12px; background: #143d2d; }
+    .poster-note { text-align: center; color: #e4d6a2; font-size: .78rem; margin: 10px 0 0; }
+    section { padding: 76px 0; }
+    .section-head { max-width: 720px; margin: 0 auto 34px; text-align: center; }
+    .section-head .eyebrow { color: var(--green); }
+    h2.section-title { font: 800 clamp(2rem, 4vw, 3.2rem)/1.08 Georgia, serif; color: var(--deep); margin: 10px 0 14px; }
+    .section-intro { color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: stretch; }
+    .feature-panel { background: white; border: 1px solid var(--line); border-radius: 22px; padding: 28px; box-shadow: var(--shadow); }
+    .feature-panel h3 { margin: 0 0 12px; font: 800 1.5rem Georgia, serif; color: var(--green); }
+    .feature-list { display: grid; grid-template-columns: 1fr 1fr; gap: 13px 18px; margin: 0; padding: 0; list-style: none; }
+    .feature-list li { display: flex; gap: 10px; align-items: flex-start; font-weight: 650; font-size: .94rem; }
+    .feature-list li span { color: #9b7a17; }
+    .callout { background: var(--green); color: white; border-radius: 22px; padding: 28px; position: relative; overflow: hidden; }
+    .callout::after { content: "✦"; position: absolute; right: 15px; top: -30px; color: rgba(212,175,55,.2); font-size: 9rem; }
+    .callout h3 { color: var(--gold); font: 800 1.5rem Georgia, serif; margin: 0 0 12px; position: relative; z-index: 1; }
+    .callout p { color: #e2eee6; position: relative; z-index: 1; }
+    .ticket-section { background: #e9e7db; }
+    .tickets { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+    .ticket {
+      width: 100%; text-align: left; border: 1px solid rgba(31,77,52,.17); border-radius: 18px;
+      padding: 0; overflow: hidden; cursor: pointer; background: white; color: var(--ink);
+      box-shadow: 0 8px 24px rgba(8,43,33,.07); transition: transform .2s ease, box-shadow .2s ease, border .2s ease;
+    }
+    .ticket:hover, .ticket:focus-visible { transform: translateY(-5px); box-shadow: var(--shadow); border-color: var(--gold); outline: none; }
+    .ticket-top { padding: 22px 22px 18px; border-bottom: 1px dashed rgba(31,77,52,.25); min-height: 155px; }
+    .ticket-icon { font-size: 1.7rem; }
+    .ticket h3 { font: 800 1.18rem Georgia, serif; margin: 8px 0 6px; }
+    .price { color: var(--green); font-weight: 950; font-size: clamp(1.45rem, 2.4vw, 1.85rem); letter-spacing: -.04em; }
+    .ticket-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 16px 22px; color: var(--muted); font-size: .85rem; }
+    .choose { font-weight: 900; color: var(--green); white-space: nowrap; }
+    .pay-note { text-align: center; color: var(--muted); font-size: .92rem; margin: 25px auto 0; max-width: 750px; }
+    .payment-section { background: var(--deep); color: white; }
+    .payment-section .section-title { color: white !important; }
+    .payment-section .section-head .eyebrow { color: var(--gold); }
+    .payment-section .section-intro { color: #d4e2d9; }
+    .payment-card { max-width: 760px; margin: auto; background: #fffdf7; color: var(--ink); border-radius: 22px; padding: clamp(22px, 4vw, 38px); box-shadow: 0 22px 65px rgba(0,0,0,.22); }
+    .payment-card h3 { margin: 0 0 6px; font: 800 1.5rem Georgia, serif; }
+    .payment-card > p { color: var(--muted); margin-top: 0; }
+    .bank-row { display: flex; justify-content: space-between; gap: 16px; align-items: center; padding: 13px 0; border-bottom: 1px solid var(--line); }
+    .bank-row:last-of-type { border-bottom: 0; }
+    .bank-label { display: block; color: var(--muted); font-size: .78rem; }
+    .bank-value { font-weight: 850; overflow-wrap: anywhere; }
+    .bank-row button { border: 1px solid var(--line); border-radius: 9px; padding: 8px 10px; background: white; color: var(--green); font-weight: 800; cursor: pointer; }
+    .notice { border-left: 4px solid var(--gold); background: #f5f0dc; padding: 13px 15px; border-radius: 0 10px 10px 0; font-size: .88rem; margin: 20px 0; }
+    .pay-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
+    .pay-actions .btn { flex: 1 1 220px; }
+    .faq { max-width: 800px; margin: auto; }
+    details { background: white; border: 1px solid var(--line); border-radius: 13px; padding: 17px 20px; margin: 10px 0; }
+    summary { cursor: pointer; font-weight: 850; }
+    details p { color: var(--muted); margin-bottom: 0; }
+    footer { background: #061f18; color: #e8eee9; padding: 36px 0; text-align: center; }
+    .footer-brand { color: var(--gold); font: 1.45rem Georgia, serif; letter-spacing: .14em; }
+    footer p { margin: 7px 0; font-size: .88rem; color: #c5d2ca; }
+    .footer-links { display: flex; flex-wrap: wrap; justify-content: center; gap: 18px; margin-top: 15px; }
+    .footer-links a { color: var(--gold); text-decoration: none; }
+    .modal-backdrop { display: none; position: fixed; inset: 0; z-index: 50; background: rgba(2,18,13,.78); padding: 18px; overflow-y: auto; align-items: center; justify-content: center; }
+    .modal-backdrop.open { display: flex; }
+    .modal { width: min(570px, 100%); background: var(--white); color: var(--ink); border-radius: 22px; padding: 26px; box-shadow: 0 25px 90px rgba(0,0,0,.4); position: relative; }
+    .modal-close { position: absolute; top: 12px; right: 14px; border: 0; background: transparent; font-size: 1.8rem; cursor: pointer; color: var(--muted); }
+    .modal .price { margin: 4px 0 12px; }
+    .modal p { color: var(--muted); }
+    .modal .bank-row { font-size: .92rem; }
+    .modal h3 { font: 800 1.65rem Georgia, serif; margin: 4px 35px 0 0; }
+    .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #082b21; color: white; padding: 12px 18px; border-radius: 999px; z-index: 80; display: none; box-shadow: var(--shadow); font-size: .9rem; }
+    .toast.show { display: block; }
+    @media (max-width: 850px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 35px; }
+      .hero-copy-wrap { text-align: center; }
+      .hero-copy { margin-inline: auto; }
+      .hero-actions, .event-meta { justify-content: center; }
+      .poster-frame { max-width: 500px; margin-inline: auto; transform: none; }
+      .tickets { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .wrap { width: min(100% - 26px, 1120px); }
+      .nav { min-height: 64px; gap: 10px; }
+      .brand-logo { width: 39px; height: 39px; }
+      .brand { gap: 7px; font-size: .9rem; letter-spacing: .08em; }
+      .navlinks a:not(.nav-buy) { display: none; }
+      .nav-buy { padding: 10px 14px; font-size: .82rem; }
+      .hero { padding: 46px 0 52px; }
+      .hero::before { font-size: 5rem; }
+      .hero::after { font-size: 7rem; }
+      .hero-copy { font-size: .98rem; }
+      section { padding: 55px 0; }
+      .tickets { grid-template-columns: 1fr; }
+      .ticket-top { min-height: auto; }
+      .feature-list { grid-template-columns: 1fr; }
+      .feature-panel, .callout { padding: 22px; }
+      .bank-row { align-items: flex-start; }
+      .bank-row button { flex-shrink: 0; }
+      .pay-actions { flex-direction: column; }
+      .pay-actions .btn { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <!--
+    SETUP BEFORE PUBLISHING:
+    1) Save your poster image in this same folder as: snow-in-paradise-poster.png
+    2) Replace the placeholder bank details in the CONFIG object below.
+    3) Confirm venue, event end time, ticket capacity, and ticket terms.
+    4) WhatsApp contact is set to 2347044394079 (Nigeria country code, no leading zero).
+    NOTE: This is a static HTML site. It does not automatically verify payments or issue unique tickets.
+  -->
+  <header class="topbar">
+    <div class="wrap nav">
+      <a class="brand" href="#home"><img class="brand-logo" src="https://res.cloudinary.com/uahzqfik/image/upload/v1793229918/FRONT_SIDE-WH.png" alt="Paradise Circuit logo"><span>PARADISE <small>C I R C U I T</small></span></a>
+      <nav class="navlinks" aria-label="Main navigation">
+        <a href="#about">About</a>
+        <a href="#tickets">Tickets</a>
+        <a href="#payment">Payment</a>
+        <a class="btn btn-gold nav-buy" href="#tickets">Buy a Ticket ↗</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div class="hero-copy-wrap">
+          <div class="eyebrow">Paradise Circuit presents</div>
+          <h1>SNOW IN <span>PARADISE</span></h1>
+          <h2>A MAGICAL CHRISTMAS CARNIVAL</h2>
+          <p class="hero-copy">Where Christmas magic comes alive! Step into a festive wonderland filled with games, music, Christmas surprises, family fun, and unforgettable memories.</p>
+          <div class="event-meta">
+            <div class="meta-pill">📅 Sunday, 20 December 2026</div>
+            <div class="meta-pill">◷ 12:00 PM WAT</div>
+            <div class="meta-pill">📍 Venue to be announced</div>
+          </div>
+          <div class="hero-actions">
+            <a class="btn btn-gold" href="#tickets">🎟 Choose Your Ticket</a>
+            <a class="btn btn-outline" href="#about">Explore the Event</a>
+          </div>
+        </div>
+        <div class="poster-frame">
+          <img src="https://res.cloudinary.com/uahzqfik/image/upload/v1793229954/Snow_in_Paradise_Christmas_Carnival_1.png" alt="Snow in Paradise Christmas Carnival official event poster" loading="eager" decoding="async" onerror="this.style.display='none';this.nextElementSibling.style.display='block';">
+          <div style="display:none;padding:40px 18px;text-align:center;color:#fffdf7">
+            <strong>Event poster unavailable</strong>
+            <p style="margin-bottom:0">Please refresh the page or check the official Paradise Circuit event poster.</p>
+          </div>
+          <p class="poster-note">Come for the Magic. Stay for the Memories!</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">A Christmas experience like no other</div>
+          <h2 class="section-title">Make This Christmas Magical</h2>
+          <p class="section-intro">A joyful celebration curated by Paradise Circuit — bringing people together for festive entertainment, beautiful moments, and the magic of the season.</p>
+        </div>
+        <div class="about-grid">
+          <div class="feature-panel">
+            <h3>What to Expect</h3>
+            <ul class="feature-list">
+              <li><span>✦</span> Carnival Games &amp; Challenges</li>
+              <li><span>✦</span> Christmas Photo Booth</li>
+              <li><span>✦</span> Karaoke &amp; Live Music</li>
+              <li><span>✦</span> Fun Competitions &amp; Prizes</li>
+              <li><span>✦</span> Christmas Carols</li>
+              <li><span>✦</span> Magical Winter Wonderland</li>
+              <li><span>✦</span> Meet Santa Claus</li>
+              <li><span>✦</span> Children's Fun Activities</li>
+              <li><span>✦</span> Gifts &amp; Giveaways</li>
+              <li><span>✦</span> Christmas Parade &amp; Surprises</li>
+              <li><span>✦</span> Dance-Off &amp; Talent Showcase</li>
+            </ul>
+          </div>
+          <div class="callout">
+            <h3>Curating Heaven On Earth</h3>
+            <p>Snow in Paradise is more than a carnival. It is a chance to relax, revel, reconnect, and create special Christmas memories with the people who matter most.</p>
+            <p><strong>Event date:</strong> 20 December 2026<br><strong>Doors / start:</strong> 12:00 PM WAT<br><strong>Venue:</strong> To be announced</p>
+            <a class="btn btn-gold" href="#tickets">Find Your Ticket</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ticket-section" id="tickets">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Reserve your experience</div>
+          <h2 class="section-title">Choose Your Ticket</h2>
+          <p class="section-intro">Select a ticket category to view payment instructions. After payment, contact our team on WhatsApp and send your proof of payment to complete your booking.</p>
+        </div>
+        <div class="tickets" id="ticketGrid"></div>
+        <p class="pay-note">Please confirm ticket availability with the Paradise Circuit team before transferring funds. A payment transfer alone is not a confirmed ticket until your payment has been checked and your booking acknowledged.</p>
+      </div>
+    </section>
+
+    <section class="payment-section" id="payment">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Secure your place</div>
+          <h2 class="section-title">How to Buy Your Ticket</h2>
+          <p class="section-intro">Choose a ticket, transfer the exact amount to the official account below, then message our team on WhatsApp with your payment receipt and attendee details.</p>
+        </div>
+        <div class="payment-card">
+          <h3>Official Payment Details</h3>
+          <p>Only pay to the verified Paradise Circuit account shown here.</p>
+          <div class="bank-row"><div><span class="bank-label">Bank name</span><span class="bank-value" id="bankNameDisplay">ADD BANK NAME</span></div><button type="button" data-copy="bankName">Copy</button></div>
+          <div class="bank-row"><div><span class="bank-label">Account name</span><span class="bank-value" id="accountNameDisplay">ADD ACCOUNT NAME</span></div><button type="button" data-copy="accountName">Copy</button></div>
+          <div class="bank-row"><div><span class="bank-label">Account number</span><span class="bank-value" id="accountNumberDisplay">ADD ACCOUNT NUMBER</span></div><button type="button" data-copy="accountNumber">Copy</button></div>
+          <div class="notice"><strong>Important:</strong> Replace the placeholder details with your verified business account before publishing. Never publish or accept payments using unverified account details.</div>
+          <div class="pay-actions">
+            <a class="btn btn-green" id="whatsappGeneral" href="#" target="_blank" rel="noopener">Continue on WhatsApp ↗</a>
+            <a class="btn btn-gold" href="#tickets">Choose a Ticket</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="faq">
+      <div class="wrap">
+        <div class="section-head">
+          <div class="eyebrow">Good to know</div>
+          <h2 class="section-title">Frequently Asked Questions</h2>
+        </div>
+        <div class="faq">
+          <details><summary>How do I purchase a ticket?</summary><p>Select your preferred ticket category, copy the payment details, transfer the correct amount, and contact Paradise Circuit on WhatsApp with your payment receipt and attendee details.</p></details>
+          <details><summary>Will my ticket be confirmed immediately?</summary><p>No. Your booking is confirmed only after the team verifies your payment and acknowledges your purchase on WhatsApp. Keep your transfer receipt.</p></details>
+          <details><summary>Where will the event take place?</summary><p>The venue will be announced by Paradise Circuit. Please check the official event page and messages from our team for updates before travelling.</p></details>
+          <details><summary>Can I buy a ticket for someone else?</summary><p>Yes, but include the attendee's name and a working contact number when you message the team so the booking can be recorded correctly.</p></details>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-brand">PARADISE CIRCUIT</div>
+      <p>CURATING HEAVEN ON EARTH</p>
+      <p>Snow in Paradise · 20 December 2026 · 12:00 PM</p>
+      <p>Tickets &amp; enquiries: <a id="footerPhone" href="#">07044394079</a></p>
+      <div class="footer-links"><a href="#home">Back to top ↑</a><a href="#tickets">Tickets</a><a id="footerWhatsApp" href="#" target="_blank" rel="noopener">WhatsApp us</a></div>
+      <p style="margin-top:22px">© <span id="year"></span> Paradise Circuit. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <div class="modal-backdrop" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+    <div class="modal">
+      <button class="modal-close" type="button" id="closeModal" aria-label="Close">×</button>
+      <div class="eyebrow">Your selected experience</div>
+      <h3 id="modalTitle">Ticket name</h3>
+      <div class="price" id="modalPrice">₦0</div>
+      <p id="modalDescription"></p>
+      <div class="bank-row"><div><span class="bank-label">Bank name</span><span class="bank-value" id="modalBankName">ADD BANK NAME</span></div><button type="button" data-copy="bankName">Copy</button></div>
+      <div class="bank-row"><div><span class="bank-label">Account name</span><span class="bank-value" id="modalAccountName">ADD ACCOUNT NAME</span></div><button type="button" data-copy="accountName">Copy</button></div>
+      <div class="bank-row"><div><span class="bank-label">Account number</span><span class="bank-value" id="modalAccountNumber">ADD ACCOUNT NUMBER</span></div><button type="button" data-copy="accountNumber">Copy</button></div>
+      <div class="notice">After transferring, tap the WhatsApp button below and send your receipt. Your ticket is not confirmed until payment is verified by the event team.</div>
+      <div class="pay-actions">
+        <a class="btn btn-green" id="modalWhatsApp" href="#" target="_blank" rel="noopener">Pay &amp; Confirm on WhatsApp ↗</a>
+        <button class="btn btn-gold" type="button" id="copyAll">Copy Payment Details</button>
+      </div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
+
+  <script>
+    /*
+      EDIT THIS CONFIGURATION BEFORE DEPLOYING.
+      Official payment and WhatsApp details supplied for Paradise Circuit.
+      WhatsApp number format: country code + number, digits only.
+    */
+    const CONFIG = {
+      whatsappNumber: "2347044394079",
+      displayPhone: "07044394079",
+      bankName: "FIRST BANK",
+      accountName: "PARADISE GIFT UBADIGHA",
+      accountNumber: "3020106660"
+    };
+
+    const TICKETS = [
+      { id: "diamond", icon: "💎", name: "Diamond Table", price: 1000000, description: "Table of 8 · Ultimate VIP Experience" },
+      { id: "platinum", icon: "🥂", name: "Platinum Table", price: 800000, description: "Table of 8 · Premium VIP Experience" },
+      { id: "emerald", icon: "💚", name: "Emerald Table", price: 500000, description: "Table of 5 · Exclusive Group Experience" },
+      { id: "gold", icon: "⭐", name: "Gold Duo Pass", price: 200000, description: "Admits 2 guests" },
+      { id: "silver", icon: "🥈", name: "Silver Single Pass", price: 100000, description: "Admits 1 adult" },
+      { id: "bronze", icon: "🧸", name: "Bronze Children's Pass", price: 50000, description: "Admits 1 child" }
+    ];
+
+    const money = amount => new Intl.NumberFormat("en-NG", {
+      style: "currency", currency: "NGN", maximumFractionDigits: 0
+    }).format(amount);
+
+    const whatsappLink = message =>
+      `https://wa.me/${CONFIG.whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
+
+    function paymentMessage(ticket) {
+      return `Hello Paradise Circuit, I am interested in purchasing a ticket for Snow in Paradise — A Magical Christmas Carnival.\n\nTicket: ${ticket.name}\nPrice: ${money(ticket.price)}\nBenefit: ${ticket.description}\n\nPlease confirm availability and the official payment details. I will send my payment receipt here for verification.\n\nAttendee name:\nAttendee phone number:\nNumber of guests:`;
+    }
+
+    const grid = document.getElementById("ticketGrid");
+    TICKETS.forEach(ticket => {
+      const button = document.createElement("button");
+      button.type = "button";
+      button.className = "ticket";
+      button.setAttribute("aria-label", `Select ${ticket.name}, ${money(ticket.price)}`);
+      button.innerHTML = `
+        <div class="ticket-top">
+          <div class="ticket-icon" aria-hidden="true">${ticket.icon}</div>
+          <h3>${ticket.name}</h3>
+          <div class="price">${money(ticket.price)}</div>
+        </div>
+        <div class="ticket-bottom"><span>${ticket.description}</span><span class="choose">Select →</span></div>`;
+      button.addEventListener("click", () => openTicket(ticket));
+      grid.appendChild(button);
+    });
+
+    function fillModalPaymentDetails() {
+      document.getElementById("modalBankName").textContent = CONFIG.bankName;
+      document.getElementById("modalAccountName").textContent = CONFIG.accountName;
+      document.getElementById("modalAccountNumber").textContent = CONFIG.accountNumber;
+    }
+    document.getElementById("bankNameDisplay").textContent = CONFIG.bankName;
+    document.getElementById("accountNameDisplay").textContent = CONFIG.accountName;
+    document.getElementById("accountNumberDisplay").textContent = CONFIG.accountNumber;
+    fillModalPaymentDetails();
+    document.getElementById("whatsappGeneral").href = whatsappLink(
+      "Hello Paradise Circuit, please send me information on ticket availability for Snow in Paradise on 20 December 2026."
+    );
+    document.getElementById("footerWhatsApp").href = whatsappLink("Hello Paradise Circuit, I have an enquiry about Snow in Paradise.");
+    document.getElementById("footerPhone").href = `tel:${CONFIG.displayPhone.replace(/\s/g, "")}`;
+    document.getElementById("footerPhone").textContent = CONFIG.displayPhone;
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    const modal = document.getElementById("ticketModal");
+    let selectedTicket = null;
+    function openTicket(ticket) {
+      selectedTicket = ticket;
+      document.getElementById("modalTitle").textContent = ticket.name;
+      document.getElementById("modalPrice").textContent = money(ticket.price);
+      document.getElementById("modalDescription").textContent = ticket.description;
+      document.getElementById("modalWhatsApp").href = whatsappLink(paymentMessage(ticket));
+      modal.classList.add("open");
+      document.body.style.overflow = "hidden";
+      document.getElementById("closeModal").focus();
+    }
+    function closeTicket() {
+      modal.classList.remove("open");
+      document.body.style.overflow = "";
+    }
+    document.getElementById("closeModal").addEventListener("click", closeTicket);
+    modal.addEventListener("click", e => { if (e.target === modal) closeTicket(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeTicket(); });
+
+    const copyValues = {
+      bankName: () => CONFIG.bankName,
+      accountName: () => CONFIG.accountName,
+      accountNumber: () => CONFIG.accountNumber
+    };
+    async function copyText(value) {
+      try {
+        await navigator.clipboard.writeText(value);
+        showToast("Copied to clipboard");
+      } catch (err) {
+        const area = document.createElement("textarea");
+        area.value = value;
+        area.style.position = "fixed";
+        area.style.opacity = "0";
+        document.body.appendChild(area);
+        area.select();
+        const ok = document.execCommand("copy");
+        area.remove();
+        showToast(ok ? "Copied to clipboard" : "Please copy the details manually");
+      }
+    }
+    document.querySelectorAll("[data-copy]").forEach(button => {
+      button.addEventListener("click", () => copyText(copyValues[button.dataset.copy]()));
+    });
+    document.getElementById("copyAll").addEventListener("click", () => {
+      const ticketText = selectedTicket ? `Ticket: ${selectedTicket.name}\nAmount: ${money(selectedTicket.price)}\n` : "";
+      copyText(`${ticketText}Bank: ${CONFIG.bankName}\nAccount name: ${CONFIG.accountName}\nAccount number: ${CONFIG.accountNumber}`);
+    });
+    let toastTimer;
+    function showToast(message) {
+      const toast = document.getElementById("toast");
+      toast.textContent = message;
+      toast.classList.add("show");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
+    }
+  </script>
+</body>
+</html>
