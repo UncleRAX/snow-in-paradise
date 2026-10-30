@@ -186,7 +186,8 @@
       .pay-actions { flex-direction: column; }
       .pay-actions .btn { width: 100%; }
     }
-  </style>
+  .booking-ticket-note{margin:12px 0 0;padding:12px 14px;border-left:4px solid #D4AF37;background:#f5f0dc;color:#1F4D34;border-radius:0 9px 9px 0;font-size:.88rem}
+</style>
 </head>
 <body>
   <!--
@@ -336,7 +337,7 @@
         <p id="modalDescription"></p>
         <div class="booking-summary">
           <div class="booking-summary-row"><span>Price per ticket unit</span><strong id="unitPrice">₦0</strong></div>
-          <div class="booking-summary-row"><span>Number of ticket units</span><strong id="summaryQuantity">1</strong></div>
+          <div class="booking-summary-row"><span>Number of ticket units / packages</span><strong id="summaryQuantity">1</strong></div>
           <div class="booking-summary-row"><span>Total guests admitted</span><strong id="summaryGuests">1</strong></div>
           <div class="booking-summary-row booking-summary-total"><span>Total amount</span><strong id="summaryTotal">₦0</strong></div>
         </div>
@@ -347,7 +348,8 @@
           <label>Quantity (number of ticket units) *<input id="ticketQuantity" name="ticketQuantity" type="number" min="1" max="100" step="1" value="1" required></label>
           <label>Additional information / special requests (optional)<textarea id="customerNotes" name="customerNotes" placeholder="Any details you would like our team to know?" maxlength="500"></textarea></label>
           <div class="step-actions"><button class="btn btn-gold" type="submit">Continue to Payment Details →</button></div>
-        </form>
+        <p class="booking-ticket-note">Each paid ticket unit admits the number of guests stated for its category. After payment is verified, Paradise Circuit will issue a separate QR admission ticket for every guest.</p>
+</form>
       </div>
 
       <div id="paymentStep" class="step-hidden">
