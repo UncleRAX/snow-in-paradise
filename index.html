@@ -140,6 +140,20 @@
     .modal p { color: var(--muted); }
     .modal .bank-row { font-size: .92rem; }
     .modal h3 { font: 800 1.65rem Georgia, serif; margin: 4px 35px 0 0; }
+    .booking-form { display: grid; gap: 13px; margin-top: 18px; }
+    .booking-form label { display: grid; gap: 6px; color: var(--ink); font-size: .88rem; font-weight: 800; }
+    .booking-form input, .booking-form textarea { width: 100%; border: 1px solid rgba(31,77,52,.24); border-radius: 10px; padding: 12px 13px; color: var(--ink); background: white; font: inherit; outline: none; }
+    .booking-form input:focus, .booking-form textarea:focus { border-color: var(--gold); box-shadow: 0 0 0 3px rgba(212,175,55,.16); }
+    .booking-form textarea { min-height: 78px; resize: vertical; }
+    .booking-summary { background: #f5f0dc; border: 1px solid rgba(212,175,55,.45); border-radius: 13px; padding: 14px; margin: 14px 0; }
+    .booking-summary-row { display: flex; justify-content: space-between; gap: 12px; padding: 4px 0; }
+    .booking-summary-row strong { text-align: right; }
+    .booking-summary-total { border-top: 1px solid rgba(31,77,52,.18); margin-top: 7px; padding-top: 10px; font-size: 1.08rem; color: var(--green); }
+    .step-hidden { display: none !important; }
+    .step-actions { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 18px; }
+    .step-actions .btn { flex: 1 1 180px; }
+    .step-caption { color: var(--green); font-size: .75rem; font-weight: 900; letter-spacing: .12em; text-transform: uppercase; }
+    .modal { max-height: calc(100vh - 36px); overflow-y: auto; }
     .toast { position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%); background: #082b21; color: white; padding: 12px 18px; border-radius: 999px; z-index: 80; display: none; box-shadow: var(--shadow); font-size: .9rem; }
     .toast.show { display: block; }
     @media (max-width: 850px) {
@@ -260,7 +274,7 @@
         <div class="section-head">
           <div class="eyebrow">Reserve your experience</div>
           <h2 class="section-title">Choose Your Ticket</h2>
-          <p class="section-intro">Select a ticket category to view payment instructions. After payment, contact our team on WhatsApp and send your proof of payment to complete your booking.</p>
+          <p class="section-intro">Select a ticket category, complete the booking inquiry, then view your calculated total and official payment details. Continue to WhatsApp to send your booking information and payment proof.</p>
         </div>
         <div class="tickets" id="ticketGrid"></div>
         <p class="pay-note">Please confirm ticket availability with the Paradise Circuit team before transferring funds. A payment transfer alone is not a confirmed ticket until your payment has been checked and your booking acknowledged.</p>
@@ -272,17 +286,14 @@
         <div class="section-head">
           <div class="eyebrow">Secure your place</div>
           <h2 class="section-title">How to Buy Your Ticket</h2>
-          <p class="section-intro">Choose a ticket, transfer the exact amount to the official account below, then message our team on WhatsApp with your payment receipt and attendee details.</p>
+          <p class="section-intro">Choose a ticket, complete your booking inquiry, and transfer the calculated total to the official account. Then message our team on WhatsApp with your booking details and payment receipt.</p>
         </div>
         <div class="payment-card">
           <h3>Official Payment Details</h3>
           <p>Only pay to the verified Paradise Circuit account shown here.</p>
-          <div class="bank-row"><div><span class="bank-label">Bank name</span><span class="bank-value" id="bankNameDisplay">ADD BANK NAME</span></div><button type="button" data-copy="bankName">Copy</button></div>
-          <div class="bank-row"><div><span class="bank-label">Account name</span><span class="bank-value" id="accountNameDisplay">ADD ACCOUNT NAME</span></div><button type="button" data-copy="accountName">Copy</button></div>
-          <div class="bank-row"><div><span class="bank-label">Account number</span><span class="bank-value" id="accountNumberDisplay">ADD ACCOUNT NUMBER</span></div><button type="button" data-copy="accountNumber">Copy</button></div>
-          <div class="notice"><strong>Important:</strong> Replace the placeholder details with your verified business account before publishing. Never publish or accept payments using unverified account details.</div>
+          <div class="notice"><strong>How it works:</strong> Choose your ticket category and complete the short booking inquiry. Your exact amount and the official Paradise Circuit payment details will then appear before you continue to WhatsApp.</div>
           <div class="pay-actions">
-            <a class="btn btn-green" id="whatsappGeneral" href="#" target="_blank" rel="noopener">Continue on WhatsApp ↗</a>
+            <a class="btn btn-green" id="whatsappGeneral" href="#" target="_blank" rel="noopener">Ask a Question on WhatsApp ↗</a>
             <a class="btn btn-gold" href="#tickets">Choose a Ticket</a>
           </div>
         </div>
@@ -296,7 +307,7 @@
           <h2 class="section-title">Frequently Asked Questions</h2>
         </div>
         <div class="faq">
-          <details><summary>How do I purchase a ticket?</summary><p>Select your preferred ticket category, copy the payment details, transfer the correct amount, and contact Paradise Circuit on WhatsApp with your payment receipt and attendee details.</p></details>
+          <details><summary>How do I purchase a ticket?</summary><p>Select your preferred ticket category, complete the booking inquiry, transfer the calculated amount, then continue to WhatsApp with your payment receipt.</p></details>
           <details><summary>Will my ticket be confirmed immediately?</summary><p>No. Your booking is confirmed only after the team verifies your payment and acknowledges your purchase on WhatsApp. Keep your transfer receipt.</p></details>
           <details><summary>Where will the event take place?</summary><p>The venue will be announced by Paradise Circuit. Please check the official event page and messages from our team for updates before travelling.</p></details>
           <details><summary>Can I buy a ticket for someone else?</summary><p>Yes, but include the attendee's name and a working contact number when you message the team so the booking can be recorded correctly.</p></details>
@@ -319,55 +330,75 @@
   <div class="modal-backdrop" id="ticketModal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
     <div class="modal">
       <button class="modal-close" type="button" id="closeModal" aria-label="Close">×</button>
-      <div class="eyebrow">Your selected experience</div>
-      <h3 id="modalTitle">Ticket name</h3>
-      <div class="price" id="modalPrice">₦0</div>
-      <p id="modalDescription"></p>
-      <div class="bank-row"><div><span class="bank-label">Bank name</span><span class="bank-value" id="modalBankName">ADD BANK NAME</span></div><button type="button" data-copy="bankName">Copy</button></div>
-      <div class="bank-row"><div><span class="bank-label">Account name</span><span class="bank-value" id="modalAccountName">ADD ACCOUNT NAME</span></div><button type="button" data-copy="accountName">Copy</button></div>
-      <div class="bank-row"><div><span class="bank-label">Account number</span><span class="bank-value" id="modalAccountNumber">ADD ACCOUNT NUMBER</span></div><button type="button" data-copy="accountNumber">Copy</button></div>
-      <div class="notice">After transferring, tap the WhatsApp button below and send your receipt. Your ticket is not confirmed until payment is verified by the event team.</div>
-      <div class="pay-actions">
-        <a class="btn btn-green" id="modalWhatsApp" href="#" target="_blank" rel="noopener">Pay &amp; Confirm on WhatsApp ↗</a>
-        <button class="btn btn-gold" type="button" id="copyAll">Copy Payment Details</button>
+      <div id="bookingStep">
+        <div class="step-caption">Step 1 of 2 · Booking inquiry</div>
+        <h3 id="modalTitle">Ticket name</h3>
+        <p id="modalDescription"></p>
+        <div class="booking-summary">
+          <div class="booking-summary-row"><span>Price per ticket unit</span><strong id="unitPrice">₦0</strong></div>
+          <div class="booking-summary-row"><span>Number of ticket units</span><strong id="summaryQuantity">1</strong></div>
+          <div class="booking-summary-row"><span>Total guests admitted</span><strong id="summaryGuests">1</strong></div>
+          <div class="booking-summary-row booking-summary-total"><span>Total amount</span><strong id="summaryTotal">₦0</strong></div>
+        </div>
+        <form class="booking-form" id="bookingForm">
+          <label>Full name *<input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="Enter your full name" required maxlength="100"></label>
+          <label>Phone number / WhatsApp number *<input id="customerPhone" name="customerPhone" type="tel" autocomplete="tel" placeholder="e.g. 08012345678" required maxlength="25"></label>
+          <label>Email address *<input id="customerEmail" name="customerEmail" type="email" autocomplete="email" placeholder="you@example.com" required maxlength="120"></label>
+          <label>Quantity (number of ticket units) *<input id="ticketQuantity" name="ticketQuantity" type="number" min="1" max="100" step="1" value="1" required></label>
+          <label>Additional information / special requests (optional)<textarea id="customerNotes" name="customerNotes" placeholder="Any details you would like our team to know?" maxlength="500"></textarea></label>
+          <div class="step-actions"><button class="btn btn-gold" type="submit">Continue to Payment Details →</button></div>
+        </form>
+      </div>
+
+      <div id="paymentStep" class="step-hidden">
+        <div class="step-caption">Step 2 of 2 · Payment details</div>
+        <h3>Complete Your Booking</h3>
+        <p id="paymentSummaryText">Review your booking and transfer the exact total below.</p>
+        <div class="booking-summary">
+          <div class="booking-summary-row"><span>Selected ticket</span><strong id="paymentTicketName"></strong></div>
+          <div class="booking-summary-row"><span>Quantity</span><strong id="paymentQuantity"></strong></div>
+          <div class="booking-summary-row"><span>Total guests</span><strong id="paymentGuests"></strong></div>
+          <div class="booking-summary-row booking-summary-total"><span>Amount to pay</span><strong id="paymentTotal"></strong></div>
+        </div>
+        <div class="bank-row"><div><span class="bank-label">Bank name</span><span class="bank-value" id="modalBankName"></span></div><button type="button" data-copy="bankName">Copy</button></div>
+        <div class="bank-row"><div><span class="bank-label">Account name</span><span class="bank-value" id="modalAccountName"></span></div><button type="button" data-copy="accountName">Copy</button></div>
+        <div class="bank-row"><div><span class="bank-label">Account number</span><span class="bank-value" id="modalAccountNumber"></span></div><button type="button" data-copy="accountNumber">Copy</button></div>
+        <div class="notice"><strong>Important:</strong> Transfer the exact amount shown. Then tap “Pay &amp; Confirm Payment” to send your booking details to Paradise Circuit on WhatsApp. Attach your payment receipt in the WhatsApp chat. Your booking is confirmed only after the team verifies your payment.</div>
+        <div class="step-actions">
+          <button class="btn btn-outline" style="color:var(--green);border-color:var(--green)" type="button" id="backToForm">← Edit Booking</button>
+          <button class="btn btn-gold" type="button" id="copyAll">Copy Payment Details</button>
+          <a class="btn btn-green" id="modalWhatsApp" href="#" target="_blank" rel="noopener">Pay &amp; Confirm Payment ↗</a>
+        </div>
       </div>
     </div>
   </div>
   <div class="toast" id="toast" role="status" aria-live="polite">Copied</div>
 
   <script>
-    /*
-      EDIT THIS CONFIGURATION BEFORE DEPLOYING.
-      Official payment and WhatsApp details supplied for Paradise Circuit.
-      WhatsApp number format: country code + number, digits only.
-    */
+    /* Official payment and WhatsApp details. Confirm these before accepting payments. */
     const CONFIG = {
       whatsappNumber: "2347044394079",
       displayPhone: "07044394079",
       bankName: "ZENITH BANK",
-      accountName: " PARADISE CIRCUIT LIMITED",
+      accountName: "PARADISE CIRCUIT LIMITED",
       accountNumber: "1312590951"
     };
 
+    // capacity is the number of guests admitted by ONE ticket unit/package.
     const TICKETS = [
-      { id: "diamond", icon: "💎", name: "Diamond Table", price: 1000000, description: "Table of 8 · Ultimate VIP Experience" },
-      { id: "platinum", icon: "🥂", name: "Platinum Table", price: 800000, description: "Table of 8 · Premium VIP Experience" },
-      { id: "emerald", icon: "💚", name: "Emerald Table", price: 500000, description: "Table of 5 · Exclusive Group Experience" },
-      { id: "gold", icon: "⭐", name: "Gold Duo Pass", price: 200000, description: "Admits 2 guests" },
-      { id: "silver", icon: "🥈", name: "Silver Single Pass", price: 100000, description: "Admits 1 adult" },
-      { id: "bronze", icon: "🧸", name: "Ruby Children's Pass", price: 50000, description: "Admits 1 child" }
+      { id: "diamond", icon: "💎", name: "Diamond Table", price: 1000000, capacity: 8, description: "Table of 8 · Ultimate VIP Experience" },
+      { id: "platinum", icon: "🥂", name: "Platinum Table", price: 800000, capacity: 8, description: "Table of 8 · Premium VIP Experience" },
+      { id: "emerald", icon: "💚", name: "Emerald Table", price: 500000, capacity: 5, description: "Table of 5 · Exclusive Group Experience" },
+      { id: "gold", icon: "⭐", name: "Gold Duo Pass", price: 200000, capacity: 2, description: "Admits 2 guests" },
+      { id: "silver", icon: "🥈", name: "Silver Single Pass", price: 100000, capacity: 1, description: "Admits 1 adult" },
+      { id: "bronze", icon: "🧸", name: "Ruby Children's Pass", price: 50000, capacity: 1, description: "Admits 1 child" }
     ];
 
     const money = amount => new Intl.NumberFormat("en-NG", {
       style: "currency", currency: "NGN", maximumFractionDigits: 0
     }).format(amount);
-
     const whatsappLink = message =>
       `https://wa.me/${CONFIG.whatsappNumber.replace(/\D/g, "")}?text=${encodeURIComponent(message)}`;
-
-    function paymentMessage(ticket) {
-      return `Hello Paradise Circuit, I am interested in purchasing a ticket for Snow in Paradise — A Magical Christmas Carnival.\n\nTicket: ${ticket.name}\nPrice: ${money(ticket.price)}\nBenefit: ${ticket.description}\n\nPlease confirm availability and the official payment details. I will send my payment receipt here for verification.\n\nAttendee name:\nAttendee phone number:\nNumber of guests:`;
-    }
 
     const grid = document.getElementById("ticketGrid");
     TICKETS.forEach(ticket => {
@@ -386,15 +417,9 @@
       grid.appendChild(button);
     });
 
-    function fillModalPaymentDetails() {
-      document.getElementById("modalBankName").textContent = CONFIG.bankName;
-      document.getElementById("modalAccountName").textContent = CONFIG.accountName;
-      document.getElementById("modalAccountNumber").textContent = CONFIG.accountNumber;
-    }
-    document.getElementById("bankNameDisplay").textContent = CONFIG.bankName;
-    document.getElementById("accountNameDisplay").textContent = CONFIG.accountName;
-    document.getElementById("accountNumberDisplay").textContent = CONFIG.accountNumber;
-    fillModalPaymentDetails();
+    document.getElementById("modalBankName").textContent = CONFIG.bankName;
+    document.getElementById("modalAccountName").textContent = CONFIG.accountName;
+    document.getElementById("modalAccountNumber").textContent = CONFIG.accountNumber;
     document.getElementById("whatsappGeneral").href = whatsappLink(
       "Hello Paradise Circuit, please send me information on ticket availability for Snow in Paradise on 20 December 2026."
     );
@@ -404,24 +429,102 @@
     document.getElementById("year").textContent = new Date().getFullYear();
 
     const modal = document.getElementById("ticketModal");
+    const bookingForm = document.getElementById("bookingForm");
     let selectedTicket = null;
+    let booking = null;
+    let toastTimer;
+
+    function quantityValue() {
+      const input = document.getElementById("ticketQuantity");
+      const value = Number.parseInt(input.value, 10);
+      return Number.isInteger(value) && value >= 1 && value <= 100 ? value : 1;
+    }
+    function updateBookingCalculation() {
+      if (!selectedTicket) return;
+      const quantity = quantityValue();
+      document.getElementById("ticketQuantity").setCustomValidity(
+        Number(document.getElementById("ticketQuantity").value) === quantity ? "" : "Enter a quantity from 1 to 100."
+      );
+      document.getElementById("unitPrice").textContent = money(selectedTicket.price);
+      document.getElementById("summaryQuantity").textContent = quantity;
+      document.getElementById("summaryGuests").textContent = quantity * selectedTicket.capacity;
+      document.getElementById("summaryTotal").textContent = money(quantity * selectedTicket.price);
+    }
+    document.getElementById("ticketQuantity").addEventListener("input", updateBookingCalculation);
+
     function openTicket(ticket) {
       selectedTicket = ticket;
+      booking = null;
       document.getElementById("modalTitle").textContent = ticket.name;
-      document.getElementById("modalPrice").textContent = money(ticket.price);
       document.getElementById("modalDescription").textContent = ticket.description;
-      document.getElementById("modalWhatsApp").href = whatsappLink(paymentMessage(ticket));
+      document.getElementById("ticketQuantity").value = 1;
+      document.getElementById("bookingStep").classList.remove("step-hidden");
+      document.getElementById("paymentStep").classList.add("step-hidden");
+      updateBookingCalculation();
       modal.classList.add("open");
       document.body.style.overflow = "hidden";
-      document.getElementById("closeModal").focus();
+      document.getElementById("customerName").focus();
     }
+
+    bookingForm.addEventListener("submit", event => {
+      event.preventDefault();
+      if (!selectedTicket || !bookingForm.reportValidity()) return;
+      const quantity = quantityValue();
+      const fullName = document.getElementById("customerName").value.trim();
+      const phone = document.getElementById("customerPhone").value.trim();
+      const email = document.getElementById("customerEmail").value.trim();
+      const notes = document.getElementById("customerNotes").value.trim();
+      if (!fullName || !phone || !email) return;
+      booking = {
+        fullName, phone, email, notes, quantity,
+        guests: quantity * selectedTicket.capacity,
+        total: quantity * selectedTicket.price
+      };
+      document.getElementById("paymentTicketName").textContent = selectedTicket.name;
+      document.getElementById("paymentQuantity").textContent = booking.quantity;
+      document.getElementById("paymentGuests").textContent = booking.guests;
+      document.getElementById("paymentTotal").textContent = money(booking.total);
+      document.getElementById("paymentSummaryText").textContent = `Thank you, ${booking.fullName}. Transfer the exact total below, then continue to WhatsApp to submit your booking details and payment receipt.`;
+      document.getElementById("modalWhatsApp").href = whatsappLink(buildBookingWhatsAppMessage());
+      document.getElementById("bookingStep").classList.add("step-hidden");
+      document.getElementById("paymentStep").classList.remove("step-hidden");
+      document.querySelector("#paymentStep .step-caption").focus?.();
+    });
+
+    function buildBookingWhatsAppMessage() {
+      if (!selectedTicket || !booking) return "Hello Paradise Circuit, I need help with my Snow in Paradise booking.";
+      return [
+        "Hello Paradise Circuit, I would like to proceed with my booking for Snow in Paradise — A Magical Christmas Carnival.",
+        "", "BOOKING DETAILS",
+        `Full name: ${booking.fullName}`,
+        `Phone / WhatsApp: ${booking.phone}`,
+        `Email address: ${booking.email}`,
+        `Ticket category: ${selectedTicket.name}`,
+        `Price per ticket unit: ${money(selectedTicket.price)}`,
+        `Quantity: ${booking.quantity} ticket unit(s)`,
+        `Guests admitted: ${booking.guests}`,
+        `TOTAL AMOUNT: ${money(booking.total)}`,
+        booking.notes ? `Additional information: ${booking.notes}` : "Additional information: None",
+        "", "PAYMENT DETAILS",
+        `Bank: ${CONFIG.bankName}`,
+        `Account name: ${CONFIG.accountName}`,
+        `Account number: ${CONFIG.accountNumber}`,
+        "", "I will attach my payment receipt to this WhatsApp message for verification. Please confirm my booking once payment has been verified."
+      ].join("\n");
+    }
+
+    document.getElementById("backToForm").addEventListener("click", () => {
+      document.getElementById("paymentStep").classList.add("step-hidden");
+      document.getElementById("bookingStep").classList.remove("step-hidden");
+      updateBookingCalculation();
+    });
     function closeTicket() {
       modal.classList.remove("open");
       document.body.style.overflow = "";
     }
     document.getElementById("closeModal").addEventListener("click", closeTicket);
-    modal.addEventListener("click", e => { if (e.target === modal) closeTicket(); });
-    document.addEventListener("keydown", e => { if (e.key === "Escape") closeTicket(); });
+    modal.addEventListener("click", event => { if (event.target === modal) closeTicket(); });
+    document.addEventListener("keydown", event => { if (event.key === "Escape") closeTicket(); });
 
     const copyValues = {
       bankName: () => CONFIG.bankName,
@@ -448,10 +551,9 @@
       button.addEventListener("click", () => copyText(copyValues[button.dataset.copy]()));
     });
     document.getElementById("copyAll").addEventListener("click", () => {
-      const ticketText = selectedTicket ? `Ticket: ${selectedTicket.name}\nAmount: ${money(selectedTicket.price)}\n` : "";
-      copyText(`${ticketText}Bank: ${CONFIG.bankName}\nAccount name: ${CONFIG.accountName}\nAccount number: ${CONFIG.accountNumber}`);
+      if (!selectedTicket || !booking) return;
+      copyText(`Ticket: ${selectedTicket.name}\nQuantity: ${booking.quantity}\nGuests: ${booking.guests}\nTotal: ${money(booking.total)}\nBank: ${CONFIG.bankName}\nAccount name: ${CONFIG.accountName}\nAccount number: ${CONFIG.accountNumber}`);
     });
-    let toastTimer;
     function showToast(message) {
       const toast = document.getElementById("toast");
       toast.textContent = message;
